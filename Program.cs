@@ -266,14 +266,14 @@ namespace Library
 
             while (isContinue)
             {
-                for (int i = 1; i < (int)Category.Count; i++)
+                for (int i = 1; i < Enum.GetNames(typeof(Category)).Length; i++)
                 {
                     Console.WriteLine($"{i}. {(Category)i}");
                 }
 
                 if (int.TryParse(Console.ReadLine(), out categoryNumber))
                 {
-                    for (int i = 0; i < (int)Category.Count; i++)
+                    for (int i = 0; i < Enum.GetNames(typeof(Category)).Length; i++)
                     {
                         if (i == categoryNumber)
                         {
@@ -331,8 +331,6 @@ namespace Library
         Fantastic = 1,
         Fantesy,
         Historical,
-        Other,
-
-        Count
+        Other
     }
 }
