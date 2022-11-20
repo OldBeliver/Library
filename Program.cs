@@ -20,7 +20,7 @@ namespace Library
         {
             _books = new List<Book>();
 
-            LoadBaseBook();
+            LoadBaseBooks();
         }
 
         public void Work()
@@ -36,7 +36,7 @@ namespace Library
                 const string AddBookCommand = "5";
                 const string RemoveBookCommand = "6";
                 const string ExitCommand = "7";
-
+               
                 Console.WriteLine($"Библиотечное хранилище\n");
 
                 Console.WriteLine($"{ShowBooksCommand}. Показать все книги");
@@ -57,15 +57,15 @@ namespace Library
                         break;
 
                     case FindByWhirterCommand:
-                        FindBooksByName();
+                        ShowBooksByName();
                         break;
 
                     case FindByYearCommand:
-                        FindBooksByYears();
+                        ShowBooksByYears();
                         break;
 
                     case FindByCategoryCommand:
-                        FindBookByCategory();
+                        ShowBookByCategory();
                         break;
 
                     case AddBookCommand:
@@ -93,7 +93,7 @@ namespace Library
 
         private void AddBook()
         {
-            Book book = GetNewBookInformation();
+            Book book = CreateNewBook();
 
             _books.Add(book);
 
@@ -136,7 +136,7 @@ namespace Library
             }
         }
 
-        private void FindBooksByName()
+        private void ShowBooksByName()
         {
             bool isFind = false;
 
@@ -163,7 +163,7 @@ namespace Library
             }
         }
 
-        private void FindBooksByYears()
+        private void ShowBooksByYears()
         {
             bool isFind = false;
 
@@ -197,7 +197,7 @@ namespace Library
             }
         }
 
-        private void FindBookByCategory()
+        private void ShowBookByCategory()
         {
             bool isFind = false;
 
@@ -224,7 +224,7 @@ namespace Library
             }
         }
 
-        private Book GetNewBookInformation()
+        private Book CreateNewBook()
         {
             Console.Clear();
 
@@ -289,7 +289,7 @@ namespace Library
             return (Category)categoryNumber;
         }
 
-        private void LoadBaseBook()
+        private void LoadBaseBooks()
         {
             _books.Add(new Book("Джон Толкин", "Хоббит, или Туда и обратно", "рукопись", 1937, Category.Fantesy));
             _books.Add(new Book("Джон Толкин", "Братство кольца", "рукопись", 1954, Category.Fantesy));
