@@ -207,13 +207,13 @@ namespace Library
 
             Console.Clear();
             Console.WriteLine($"Поиск по категории");
-
-            int index = (int)GetCategory();            
+            
+            Category category = GetCategory();
 
             for (int i = 0; i < _books.Count; i++)
             {
-                if (_books[i].Category == (Category)index)
-                {
+                if (_books[i].Category == category)
+                {                    
                     Console.Write($"{i + 1}. ");
                     _books[i].ShowInfo();
 
@@ -222,8 +222,8 @@ namespace Library
             }
 
             if (isFind == false)
-            {
-                Console.WriteLine($"книги в категории {(Category)index} не найдены.");
+            {               
+                Console.WriteLine($"книги в категории {category} не найдены.");
                 Console.ReadKey();
             }
         }
@@ -266,8 +266,8 @@ namespace Library
         private Category GetCategory()
         {
             bool isContinue = true;
-            int categoryNumber = 0;
-
+            Category category = Category.Other;
+           
             while (isContinue)
             {
                 for (int i = 1; i <= Enum.GetNames(typeof(Category)).Length; i++)
@@ -277,12 +277,13 @@ namespace Library
 
                 Console.WriteLine($"Выберите категорию книги:");
 
-                if (int.TryParse(Console.ReadLine(), out categoryNumber))
+                if (int.TryParse(Console.ReadLine(), out int categoryNumber))
                 {
                     for (int i = 0; i <= Enum.GetNames(typeof(Category)).Length; i++)
                     {
                         if (i == categoryNumber)
                         {
+                            category = (Category)categoryNumber;
                             isContinue = false;                            
                         }
                     }
@@ -291,7 +292,7 @@ namespace Library
                 Console.Clear();
             }
 
-            return (Category)categoryNumber;
+            return category;
         }
 
         private void LoadBaseBooks()
@@ -323,7 +324,6 @@ namespace Library
         public string Writer { get; private set; }
         public int ImprintDate { get; private set; }
         public Category Category { get; private set; }
-
 
         public void ShowInfo()
         {
