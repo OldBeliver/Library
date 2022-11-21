@@ -36,7 +36,7 @@ namespace Library
                 const string AddBookCommand = "5";
                 const string RemoveBookCommand = "6";
                 const string ExitCommand = "7";
-               
+
                 Console.WriteLine($"Библиотечное хранилище\n");
 
                 Console.WriteLine($"{ShowBooksCommand}. Показать все книги");
@@ -118,6 +118,10 @@ namespace Library
                 _books.RemoveAt(bookIndex);
 
                 Console.WriteLine($"Книга удалена");
+            }
+            else
+            {
+                Console.WriteLine($"Нет такого индекса");
             }
         }
 
@@ -204,10 +208,9 @@ namespace Library
             Console.Clear();
             Console.WriteLine($"Поиск по категории");
 
-            Console.WriteLine($"Выберите категорию книги:");
-            int index = (int)GetCategory();
+            int index = (int)GetCategory();            
 
-            for (int i = 1; i < _books.Count; i++)
+            for (int i = 0; i < _books.Count; i++)
             {
                 if (_books[i].Category == (Category)index)
                 {
@@ -221,6 +224,7 @@ namespace Library
             if (isFind == false)
             {
                 Console.WriteLine($"книги в категории {(Category)index} не найдены.");
+                Console.ReadKey();
             }
         }
 
@@ -266,19 +270,20 @@ namespace Library
 
             while (isContinue)
             {
-                for (int i = 1; i < Enum.GetNames(typeof(Category)).Length; i++)
+                for (int i = 1; i <= Enum.GetNames(typeof(Category)).Length; i++)
                 {
                     Console.WriteLine($"{i}. {(Category)i}");
                 }
 
+                Console.WriteLine($"Выберите категорию книги:");
+
                 if (int.TryParse(Console.ReadLine(), out categoryNumber))
                 {
-                    for (int i = 0; i < Enum.GetNames(typeof(Category)).Length; i++)
+                    for (int i = 0; i <= Enum.GetNames(typeof(Category)).Length; i++)
                     {
                         if (i == categoryNumber)
                         {
-                            isContinue = false;
-                            break;
+                            isContinue = false;                            
                         }
                     }
                 }
