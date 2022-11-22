@@ -279,7 +279,7 @@ namespace Library
 
                 if (int.TryParse(Console.ReadLine(), out int categoryNumber))
                 {
-                    for (int i = 0; i <= Enum.GetNames(typeof(Category)).Length; i++)
+                    for (int i = 1; i <= Enum.GetNames(typeof(Category)).Length; i++)
                     {
                         if (i == categoryNumber)
                         {
