@@ -111,9 +111,11 @@ namespace Library
                 return;
             }
 
+            --bookIndex;
+
             if (bookIndex >= 0 && bookIndex < _books.Count)
             {
-                _books.RemoveAt(bookIndex-1);
+                _books.RemoveAt(bookIndex);
 
                 Console.WriteLine($"Книга удалена");
             }
