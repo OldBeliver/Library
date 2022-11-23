@@ -207,13 +207,13 @@ namespace Library
 
             Console.Clear();
             Console.WriteLine($"Поиск по категории");
-            
+
             Category category = GetCategory();
 
             for (int i = 0; i < _books.Count; i++)
             {
                 if (_books[i].Category == category)
-                {                    
+                {
                     Console.Write($"{i + 1}. ");
                     _books[i].ShowInfo();
 
@@ -222,7 +222,7 @@ namespace Library
             }
 
             if (isFind == false)
-            {               
+            {
                 Console.WriteLine($"книги в категории {category} не найдены.");
                 Console.ReadKey();
             }
@@ -265,34 +265,72 @@ namespace Library
 
         private Category GetCategory()
         {
-            bool isContinue = true;
+            string[] categories = Enum.GetNames(typeof(Category));
+            bool isCategoryExist = false;
             Category category = Category.Other;
-           
-            while (isContinue)
+            string message = "";
+
+            while (isCategoryExist == false)
             {
-                for (int i = 1; i <= Enum.GetNames(typeof(Category)).Length; i++)
+                for (int i = 0; i < categories.Length; i++)
                 {
-                    Console.WriteLine($"{i}. {(Category)i}");
+                    Console.WriteLine($"{i + 1}. {categories[i]}");
                 }
 
-                Console.WriteLine($"Выберите категорию книги:");
+                Console.WriteLine($"Выберите номер категории книги:");
 
                 if (int.TryParse(Console.ReadLine(), out int categoryNumber))
                 {
-                    for (int i = 1; i <= Enum.GetNames(typeof(Category)).Length; i++)
+                    if (categoryNumber > 0 && categoryNumber <= categories.Length)
+                    {                       
+                        category = (Category)categoryNumber;
+                        message = $"Выбраная категория: {category}";
+                        isCategoryExist = true;
+                    }
+                    else
                     {
-                        if (i == categoryNumber)
-                        {
-                            category = (Category)categoryNumber;
-                            isContinue = false;                            
-                        }
+                        message = "Ошибка выбора категории";
                     }
                 }
+                else
+                {
+                    message = "Ошибка ввода числа";
+                }
 
-                Console.Clear();
-            }
+                Console.WriteLine(message);
+                Console.ReadKey();
+            }            
 
             return category;
+
+            //bool isContinue = true;
+            //Category category = Category.Other;
+
+            //while (isContinue)
+            //{
+            //    for (int i = 1; i <= Enum.GetNames(typeof(Category)).Length; i++)
+            //    {
+            //        Console.WriteLine($"{i}. {(Category)i}");
+            //    }
+
+            //    Console.WriteLine($"Выберите категорию книги:");
+
+            //    if (int.TryParse(Console.ReadLine(), out int categoryNumber))
+            //    {
+            //        for (int i = 1; i <= Enum.GetNames(typeof(Category)).Length; i++)
+            //        {
+            //            if (i == categoryNumber)
+            //            {
+            //                category = (Category)categoryNumber;
+            //                isContinue = false;                            
+            //            }
+            //        }
+            //    }
+
+            //    Console.Clear();
+            //}
+
+            //return category;
         }
 
         private void LoadBaseBooks()
