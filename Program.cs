@@ -111,11 +111,9 @@ namespace Library
                 return;
             }
 
-            --bookIndex;
-
             if (bookIndex >= 0 && bookIndex < _books.Count)
             {
-                _books.RemoveAt(bookIndex);
+                _books.RemoveAt(bookIndex-1);
 
                 Console.WriteLine($"Книга удалена");
             }
@@ -282,7 +280,7 @@ namespace Library
                 if (int.TryParse(Console.ReadLine(), out int categoryNumber))
                 {
                     if (categoryNumber > 0 && categoryNumber <= categories.Length)
-                    {                       
+                    {
                         category = (Category)categoryNumber;
                         message = $"Выбраная категория: {category}";
                         isCategoryExist = true;
@@ -299,38 +297,9 @@ namespace Library
 
                 Console.WriteLine(message);
                 Console.ReadKey();
-            }            
+            }
 
             return category;
-
-            //bool isContinue = true;
-            //Category category = Category.Other;
-
-            //while (isContinue)
-            //{
-            //    for (int i = 1; i <= Enum.GetNames(typeof(Category)).Length; i++)
-            //    {
-            //        Console.WriteLine($"{i}. {(Category)i}");
-            //    }
-
-            //    Console.WriteLine($"Выберите категорию книги:");
-
-            //    if (int.TryParse(Console.ReadLine(), out int categoryNumber))
-            //    {
-            //        for (int i = 1; i <= Enum.GetNames(typeof(Category)).Length; i++)
-            //        {
-            //            if (i == categoryNumber)
-            //            {
-            //                category = (Category)categoryNumber;
-            //                isContinue = false;                            
-            //            }
-            //        }
-            //    }
-
-            //    Console.Clear();
-            //}
-
-            //return category;
         }
 
         private void LoadBaseBooks()
