@@ -266,40 +266,57 @@ namespace Library
         private Category GetCategory()
         {
             string[] categories = Enum.GetNames(typeof(Category));
-            bool isCategoryExist = false;
-            Category category = Category.Other;
-            string message = "";
 
-            while (isCategoryExist == false)
+            for (int i = 0; i < categories.Length; i++)
             {
-                for (int i = 0; i < categories.Length; i++)
-                {
-                    Console.WriteLine($"{i + 1}. {categories[i]}");
-                }
-
-                Console.WriteLine($"Выберите номер категории книги:");
-
-                if (int.TryParse(Console.ReadLine(), out int categoryNumber))
-                {
-                    if (categoryNumber > 0 && categoryNumber <= categories.Length)
-                    {
-                        category = (Category)categoryNumber;
-                        message = $"Выбраная категория: {category}";
-                        isCategoryExist = true;
-                    }
-                    else
-                    {
-                        message = "Ошибка выбора категории";
-                    }
-                }
-                else
-                {
-                    message = "Ошибка ввода числа";
-                }
-
-                Console.WriteLine(message);
-                Console.ReadKey();
+                Console.WriteLine($"{i + 1}. {categories[i]}");
             }
+
+            Console.WriteLine($"Введите номер категории:");
+            int number = int.Parse(Console.ReadLine());
+
+            if (number > 0 && number <= categories.Length)
+            {
+                Console.WriteLine($"Число в диапазоне допустимых чисел");
+            }
+
+            //string[] categories = Enum.GetNames(typeof(Category));
+            //bool isCategoryExist = false;
+            Category category = Category.Other;
+            //string message = "";
+
+            //while (isCategoryExist == false)
+            //{
+            //    for (int i = 0; i < categories.Length; i++)
+            //    {
+            //        Console.WriteLine($"{i + 1}. {categories[i]}");
+            //    }
+
+            //    Console.WriteLine($"Выберите номер категории книги:");
+
+            //    if (int.TryParse(Console.ReadLine(), out int index))
+            //    {
+            //        if (index > 0 && index <= categories.Length)
+            //        {
+
+
+
+            //            message = $"Выбраная категория: {category}";
+            //            isCategoryExist = true;
+            //        }
+            //        else
+            //        {
+            //            message = "Ошибка выбора категории";
+            //        }
+            //    }
+            //    else
+            //    {
+            //        message = "Ошибка ввода числа";
+            //    }
+
+            //    Console.WriteLine(message);
+            //    Console.ReadKey();
+            //}
 
             return category;
         }
@@ -342,9 +359,14 @@ namespace Library
 
     enum Category
     {
-        Fantastic = 1,
-        Fantesy,
-        Historical,
-        Other
+        //Fantastic = 1,
+        //Fantesy,
+        //Historical,
+        //Other
+
+        Fantastic = 10,
+        Fantesy = 20,
+        Historical = -30,
+        Other = 0
     }
 }
