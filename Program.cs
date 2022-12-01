@@ -265,58 +265,20 @@ namespace Library
 
         private Category GetCategory()
         {
+            Category category;
+
             string[] categories = Enum.GetNames(typeof(Category));
 
             for (int i = 0; i < categories.Length; i++)
             {
-                Console.WriteLine($"{i + 1}. {categories[i]}");
+                Console.WriteLine($"{i+1}. {categories[i]}");
             }
 
-            Console.WriteLine($"Введите номер категории:");
             int number = int.Parse(Console.ReadLine());
 
-            if (number > 0 && number <= categories.Length)
-            {
-                Console.WriteLine($"Число в диапазоне допустимых чисел");
-            }
+            category = (Category)Enum.GetValues(typeof(Category)).GetValue(number-1);
 
-            //string[] categories = Enum.GetNames(typeof(Category));
-            //bool isCategoryExist = false;
-            Category category = Category.Other;
-            //string message = "";
-
-            //while (isCategoryExist == false)
-            //{
-            //    for (int i = 0; i < categories.Length; i++)
-            //    {
-            //        Console.WriteLine($"{i + 1}. {categories[i]}");
-            //    }
-
-            //    Console.WriteLine($"Выберите номер категории книги:");
-
-            //    if (int.TryParse(Console.ReadLine(), out int index))
-            //    {
-            //        if (index > 0 && index <= categories.Length)
-            //        {
-
-
-
-            //            message = $"Выбраная категория: {category}";
-            //            isCategoryExist = true;
-            //        }
-            //        else
-            //        {
-            //            message = "Ошибка выбора категории";
-            //        }
-            //    }
-            //    else
-            //    {
-            //        message = "Ошибка ввода числа";
-            //    }
-
-            //    Console.WriteLine(message);
-            //    Console.ReadKey();
-            //}
+            Console.WriteLine($"Выбрана категория {category.ToString()}");            
 
             return category;
         }
