@@ -266,99 +266,41 @@ namespace Library
         private Category GetCategory()
         {
             Category category = default;
+            Array categories = Enum.GetValues(typeof(Category));
+            bool isSuccess = false;
 
-            string[] names = Enum.GetNames(typeof(Category));
-            Array caregories = Enum.GetValues(typeof(Category));            
-
-
-            //Enum - это массив именованных констант - какой смысл переводить массив в другой  массив?
-
-            for (int i = 0; i < caregories.Length; i++)
+            while(isSuccess == false)
             {
-                Console.WriteLine($"{i + 1}. {names[i]}"); // одномерный массив
-                Console.WriteLine($"{i + 1}. {caregories.GetValue(i)}"); // массив массивов
-                Console.WriteLine($"{i + 1}. {Enum.GetNames(typeof(Category)).GetValue(i)}"); // массив массивов                
-                Console.WriteLine();
-            }
+                Console.Clear();
 
-            int number = 3;
-            
-            category = (Category)caregories.GetValue(number);
-            Console.WriteLine($"Выбрана категория {category} {(int)category}");
-
-            category = (Category)Enum.GetValues(typeof(Category)).GetValue(number);
-            Console.WriteLine($"Выбрана категория {category} {(int)category}");
-
-            Console.ReadKey();
-
-            return category;
-
-            /*
-             Category category = default;
-            bool isWork = true;
-            var categories = Enum.GetValues(typeof(Category));
-
-            for (int i = 0; i < categories.Length; i++)
-            {
-                Console.WriteLine($"{i + 1}. {categories.GetValue(i)}");
-            }
-
-            while (isWork)
-            {
-                Console.Write("Category = ");
-
-                if (int.TryParse(Console.ReadLine(), out int number))
+                for (int i = 0; i < categories.Length; i++)
                 {
-                    if (number > 0 && number <= categories.Length)
+                    Console.WriteLine($"{i + 1}. {categories.GetValue(i)}");
+                }
+
+                Console.WriteLine($"\nВведите номер категории:");
+
+                if(int.TryParse(Console.ReadLine(), out int number))
+                {
+                    if(number>0 && number <= categories.Length)
                     {
-                        category = (Category)categories.GetValue(number);
-                        isWork = false;
+                        category = (Category)categories.GetValue(number - 1);
+                        isSuccess = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Ошибка номера категории");
+                        Console.ReadKey();
                     }
                 }
+                else
+                {
+                    Console.WriteLine($"Ошибка ввода числа");
+                    Console.ReadKey();
+                }
             }
-
-            Console.WriteLine($"Выбрана категория {category} {(int)category}");
-
-            return category; 
-             */
-
-
-
-            //bool isFound = false;
-            //int number = 0;
-            ////Category category;
-
-            //string[] categories = Enum.GetNames(typeof(Category));
-
-            //for (int i = 0; i < categories.Length; i++)
-            //{
-            //    Console.WriteLine($"{i + 1}. {categories[i]}");
-            //}
-
-            //Category category = default;
-            //bool isWork = true;
-            //Array icategories = Enum.GetValues(typeof(Category));
-
-            //for (int i = 0; i < icategories.Length; i++)
-            //{
-            //    Console.WriteLine($"{i + 1}. {icategories.GetValue(i)}");
-            //}
-
-            //Console.WriteLine($"введите номер категории:");
-            //number = int.Parse(Console.ReadLine());
-
-            //if (number < 1)
-            //{
-            //    Console.WriteLine($"беда с {number}");
-            //    Console.ReadKey();
-            //}
-
-
-            //category = (Category)Enum.GetValues(typeof(Category)).GetValue(number - 1);
-
-            //Console.WriteLine($"Выбрана категория {category.ToString()}");
-
-            //return category;
+            
+            return category;
         }
 
         private void LoadBaseBooks()
